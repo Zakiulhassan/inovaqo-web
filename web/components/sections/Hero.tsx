@@ -1,10 +1,7 @@
 import Image from 'next/image';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
-import { GrowingLine } from '@/components/ui/GrowingLine';
 
 const ArrowIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M5 12h14M13 6l6 6-6 6"/>
   </svg>
 );
@@ -12,55 +9,43 @@ const ArrowIcon = () => (
 export function Hero() {
   return (
     <header className="hero" id="top">
-      <div className="ino-wrap hero__grid">
-        <div>
-          <span className="ino-eye">Software Studio</span>
+      <div className="ino-wrap">
+        <div className="hero__inner">
+          <span className="hero__eyebrow">AI · Cloud · Product Engineering</span>
           <h1>
-            We engineer software that{' '}
-            <span className="scriptword">makes a difference.</span>
+            Your product deserves engineering that{' '}
+            <em>scales</em>{' '}
+            as fast as you do.
           </h1>
           <p className="lead">
-            Smart web and mobile apps for teams that want to move fast and build right.
-            Some of it runs on AI. Some turns messy data into insight.
-            All of it ships sharp, scalable, and real.
+            We help startups and growing teams ship smarter software — AI-powered, cloud-native, and built to handle what comes next.
           </p>
           <div className="hero__cta">
-            <Button variant="primary" size="lg" iconRight={<ArrowIcon />} as="a" href="#contact">
-              Start a project
-            </Button>
-            <Button variant="ghost" size="lg" as="a" href="#work" style={{ color: '#fff' }}>
-              See our work
-            </Button>
-          </div>
-          <div className="hero__stats">
-            <div className="stat">
-              <div className="n">40+</div>
-              <div className="l">Products shipped</div>
-            </div>
-            <div className="stat">
-              <div className="n">9</div>
-              <div className="l">Years building</div>
-            </div>
-            <div className="stat">
-              <div className="n">98%</div>
-              <div className="l">Client retention</div>
-            </div>
+            <a href="#contact" className="ino-btn ino-btn--primary ino-btn--lg">
+              Start a Conversation
+            </a>
+            <a href="#case-studies" className="ino-btn ino-btn--ghost ino-btn--lg">
+              See our work <ArrowIcon />
+            </a>
           </div>
         </div>
-        <div className="hero__panel">
-          <div className="mark">
-            <Image src="/assets/inovaqo-logo-white.svg" alt="" width={200} height={40} />
+
+        <div className="hero__stats-bar">
+          <div className="hero__stat">
+            <div className="n">75+</div>
+            <div className="l">Satisfied clients</div>
           </div>
-          <div className="chip">
-            <Badge variant="solid">AI / ML</Badge>
-            <div>
-              <div className="t">Insight engine</div>
-              <div className="s">Live · processing 2.4M events/day</div>
-            </div>
+          <div className="hero__stat">
+            <div className="n">98%</div>
+            <div className="l">Satisfaction rate</div>
+          </div>
+          <div className="hero__stat">
+            <div className="n">2 wks</div>
+            <div className="l">Idea to MVP</div>
           </div>
         </div>
+        <p className="hero__trust">— Trusted by founders, CTOs, and product teams worldwide</p>
       </div>
-      <GrowingLine variant="loop" height={140} style={{ marginTop: 30 }} />
     </header>
   );
 }

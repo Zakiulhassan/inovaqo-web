@@ -1,10 +1,11 @@
 import { Nav } from '@/components/sections/Nav';
 import { Hero } from '@/components/sections/Hero';
+import { Problem } from '@/components/sections/Problem';
 import { Services } from '@/components/sections/Services';
-import { Work } from '@/components/sections/Work';
-import { Mission } from '@/components/sections/Mission';
 import { Process } from '@/components/sections/Process';
-import { Contact } from '@/components/sections/Contact';
+import { Testimonials } from '@/components/sections/Testimonials';
+import { CaseStudies } from '@/components/sections/CaseStudies';
+import { CTA } from '@/components/sections/CTA';
 import { Footer } from '@/components/sections/Footer';
 
 export default function Home() {
@@ -12,11 +13,12 @@ export default function Home() {
     <>
       <Nav />
       <Hero />
+      <Problem />
       <Services />
-      <Work />
-      <Mission />
       <Process />
-      <Contact />
+      <Testimonials />
+      <CaseStudies />
+      <CTA />
       <Footer />
     </>
   );

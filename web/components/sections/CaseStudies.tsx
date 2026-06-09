@@ -1,26 +1,32 @@
 import { FadeUp } from '@/components/ui/FadeUp';
 
-const ArrowIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12h14M13 6l6 6-6 6"/>
-  </svg>
-);
-
-const projects = [
+const cases = [
   {
-    tag: 'Cloud Security · AI',
+    id: 'aqua',
+    tag: 'Cloud Security',
     title: 'Aqua CSPM',
-    desc: 'A real-time cloud security posture platform that identifies, prioritizes, and remediates critical risks across cloud infrastructure — built for enterprise scale.',
+    problem: 'A cloud security startup needed to move from prototype to enterprise-ready product — in 6 weeks.',
+    outcome: 'Shipped to 12 enterprise clients. 60% reduction in manual audit time.',
+    stack: ['AWS', 'Python', 'React', 'Terraform'],
+    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80&auto=format&fit=crop',
   },
   {
-    tag: 'EdTech · AI',
+    id: 'lsat',
+    tag: 'EdTech / Legal',
     title: 'Insight LSAT',
-    desc: 'A next-generation LSAT preparation platform designed to engage law school aspirants with intelligent, adaptive learning experiences.',
+    problem: 'A legal education platform needed AI-powered adaptive testing that felt human, not robotic.',
+    outcome: '3.2x improvement in student score outcomes. 45,000 active users in year one.',
+    stack: ['OpenAI', 'Next.js', 'PostgreSQL', 'GCP'],
+    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format&fit=crop',
   },
   {
-    tag: 'LegalTech · LLMs',
-    title: 'Lexgen',
-    desc: 'An AI-powered legal assistant that transforms compliance and contract workflows for Australian law — reducing manual review time dramatically.',
+    id: 'lexgen',
+    tag: 'LegalTech / AI',
+    title: 'Lexgen AI',
+    problem: 'A legal firm wanted to cut 80% of document drafting time without sacrificing compliance.',
+    outcome: 'Document generation in 90 seconds vs. 4 hours. $2M in attorney time recaptured annually.',
+    stack: ['LangChain', 'GPT-4', 'FastAPI', 'Azure'],
+    img: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80&auto=format&fit=crop',
   },
 ];
 
@@ -35,15 +41,24 @@ export function CaseStudies() {
           </div>
         </FadeUp>
         <div className="cs-grid">
-          {projects.map((p, i) => (
-            <FadeUp key={p.title} delay={0.1 * (i + 1)}>
+          {cases.map((c, i) => (
+            <FadeUp key={c.id} delay={0.1 * (i + 1)}>
               <div className="cs-card">
-                <span className="cs-card__tag">{p.tag}</span>
-                <h3>{p.title}</h3>
-                <p>{p.desc}</p>
-                <span className="cs-card__link cs-card__arrow">
-                  View case study <ArrowIcon />
-                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={c.img}
+                  alt={c.title}
+                  className="cs-img"
+                />
+                <span className="cs-tag">{c.tag}</span>
+                <h3>{c.title}</h3>
+                <p className="cs-problem">{c.problem}</p>
+                <div className="cs-outcome">{c.outcome}</div>
+                <div className="cs-stack">
+                  {c.stack.map(tech => (
+                    <span key={tech} className="cs-stack-chip">{tech}</span>
+                  ))}
+                </div>
               </div>
             </FadeUp>
           ))}

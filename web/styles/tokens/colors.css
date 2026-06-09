@@ -1,0 +1,99 @@
+:root {
+  --cyan-50:  #E6FBF9;
+  --cyan-100: #C2F4F0;
+  --cyan-200: #8FEAE3;
+  --cyan-300: #4FDDD3;
+  --cyan-400: #10D5C8;
+  --cyan-500: #0FB7AC;
+  --cyan-600: #0C9389;
+  --cyan-700: #0A7068;
+  --cyan-800: #0A554F;
+  --cyan-900: #0A3C40;
+
+  --n-0:   #FFFFFF;
+  --n-25:  #F4FBF8;
+  --n-50:  #ECF6F2;
+  --n-100: #DCEAE6;
+  --n-200: #C3D6D1;
+  --n-300: #9FB3AF;
+  --n-400: #7C8C8A;
+  --n-500: #5C6B6A;
+  --n-600: #45514F;
+  --n-700: #2E3A38;
+  --n-800: #182524;
+  --n-900: #0E1B1B;
+  --n-950: #09191B;
+
+  --mint:     #D8FFE7;
+  --mint-200: #B6F4CE;
+  --sage:     #9AAF97;
+  --slate:    #526162;
+
+  --grad-from: #10D5C8;
+  --grad-to:   #075F59;
+  --gradient-brand: linear-gradient(120deg, #10D5C8 0%, #075F59 100%);
+  --gradient-deep:  linear-gradient(150deg, #0E2C2D 0%, #0A3C40 55%, #062227 100%);
+
+  --success-500: #14A085;
+  --success-100: #D2F2E8;
+  --warning-500: #E0A52E;
+  --warning-100: #FBEBCB;
+  --danger-500:  #E5544B;
+  --danger-100:  #FBDAD6;
+  --info-500:    #10D5C8;
+  --info-100:    #C2F4F0;
+
+  --bg:              var(--n-25);
+  --surface:         var(--n-0);
+  --surface-2:       var(--n-50);
+  --surface-inset:   var(--n-100);
+  --surface-brand:   var(--cyan-900);
+
+  --text-strong:     var(--n-950);
+  --text:            var(--n-800);
+  --text-muted:      var(--n-500);
+  --text-subtle:     var(--n-400);
+  --text-inverse:    var(--n-0);
+  --text-on-brand:   var(--n-950);
+
+  --border:          var(--n-200);
+  --border-strong:   var(--n-300);
+  --border-subtle:   var(--n-100);
+
+  --brand:           var(--cyan-400);
+  --brand-hover:     var(--cyan-500);
+  --brand-press:     var(--cyan-600);
+  --brand-soft:      var(--cyan-50);
+  --brand-contrast:  var(--n-950);
+
+  --line:            var(--cyan-400);
+  --ring:            color-mix(in oklch, var(--cyan-400) 45%, transparent);
+  --overlay:         color-mix(in oklch, var(--n-950) 55%, transparent);
+}
+
+[data-theme="dark"] {
+  --bg:              var(--n-950);
+  --surface:         #0E2123;
+  --surface-2:       #12292B;
+  --surface-inset:   #0A1C1D;
+
+  --text-strong:     var(--n-0);
+  --text:            #D7E6E2;
+  --text-muted:      #93A8A5;
+  --text-subtle:     #6E817F;
+  --text-inverse:    var(--n-950);
+  --text-on-brand:   var(--n-950);
+
+  --border:          #1E3335;
+  --border-strong:   #2C4547;
+  --border-subtle:   #16282A;
+
+  --brand:           var(--cyan-400);
+  --brand-hover:     var(--cyan-300);
+  --brand-press:     var(--cyan-500);
+  --brand-soft:      #0E2C2D;
+
+  --line:            var(--cyan-400);
+  --ring:            color-mix(in oklch, var(--cyan-400) 55%, transparent);
+  --overlay:         color-mix(in oklch, #000 60%, transparent);
+}

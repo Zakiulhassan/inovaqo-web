@@ -1,23 +1,16 @@
 'use client';
 import { motion } from 'framer-motion';
-import { FadeUp } from '@/components/ui/FadeUp';
 import { CountUp } from '@/components/ui/CountUp';
 import { FlowLine } from '@/components/ui/FlowLine';
+import { Marquee } from '@/components/ui/Marquee';
 
-const ArrowIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12h14M13 6l6 6-6 6"/>
-  </svg>
-);
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
-const lineVariants = {
-  hidden: { y: '105%', opacity: 0 },
-  visible: (i: number) => ({
-    y: '0%',
-    opacity: 1,
-    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.1 + i * 0.12 }
-  })
-};
+const lines = [
+  'We engineer',
+  <>software that <em>works.</em></>,
+  'Built for scale.',
+];
 
 export function Hero() {
   return (
@@ -25,70 +18,90 @@ export function Hero() {
       <div className="hero-blob hero-blob-1" />
       <div className="hero-blob hero-blob-2" />
 
-      <div className="ino-wrap hero__inner">
-        <motion.span
-          className="hero__pill"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.05 }}
+      <div className="ino-wrap hero__wrap">
+        <motion.p
+          className="hero__overline"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.1 }}
         >
-          AI · Cloud · Product Engineering
-        </motion.span>
+          AI&nbsp;&nbsp;·&nbsp;&nbsp;Cloud&nbsp;&nbsp;·&nbsp;&nbsp;Product Engineering
+        </motion.p>
 
         <h1 className="hero__h1">
-          {['Your product deserves', 'engineering that scales', 'as fast as you do.'].map((line, i) => (
+          {lines.map((line, i) => (
             <span key={i} className="hero-line-wrap">
               <motion.span
                 className="hero-line-inner"
-                custom={i}
-                initial="hidden"
-                animate="visible"
-                variants={lineVariants}
+                initial={{ y: '110%' }}
+                animate={{ y: '0%' }}
+                transition={{ duration: 1, ease, delay: 0.25 + i * 0.14 }}
               >
-                {i === 1 ? (
-                  <>engineering that <em className="hero__em">scales</em></>
-                ) : line}
+                {line}
               </motion.span>
             </span>
           ))}
         </h1>
 
-        <FadeUp delay={0.55}>
-          <p className="hero__sub">
-            We help startups and growing teams ship smarter software —<br/>
+        <div className="hero__footer">
+          <motion.p
+            className="hero__sub"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease, delay: 0.75 }}
+          >
+            We help startups and growing teams ship smarter software —<br />
             AI-powered, cloud-native, and built to handle what comes next.
-          </p>
-        </FadeUp>
+          </motion.p>
 
-        <FadeUp delay={0.7}>
-          <div className="hero__ctas">
-            <a href="#contact" className="ino-btn ino-btn--primary ino-btn--lg magnetic">Book a Discovery Call</a>
-            <a href="#work" className="hero__ghost-link">See our work <ArrowIcon /></a>
-          </div>
-        </FadeUp>
-
-        <FadeUp delay={0.85}>
-          <div className="hero__trust">
-            <div className="hero__stat">
-              <span className="hero__stat-n"><CountUp to={75} suffix="+" /></span>
-              <span className="hero__stat-l">Satisfied clients</span>
-            </div>
-            <span className="hero__divider" />
-            <div className="hero__stat">
-              <span className="hero__stat-n"><CountUp to={98} suffix="%" /></span>
-              <span className="hero__stat-l">Satisfaction rate</span>
-            </div>
-            <span className="hero__divider" />
-            <div className="hero__stat">
-              <span className="hero__stat-n">2 wks</span>
-              <span className="hero__stat-l">Idea to MVP</span>
-            </div>
-          </div>
-          <p className="hero__trust-line">— Trusted by founders, CTOs, and product teams worldwide</p>
-        </FadeUp>
+          <motion.div
+            className="hero__actions"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease, delay: 0.9 }}
+          >
+            <a href="#contact" className="ino-btn ino-btn--primary ino-btn--lg">
+              Book a Discovery Call
+            </a>
+            <a href="#work" className="hero__text-link">
+              See our work
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </motion.div>
+        </div>
       </div>
 
-      <FlowLine style={{ marginTop: 40 }} />
+      <motion.div
+        className="hero__stats-row"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, delay: 1.05 }}
+      >
+        <div className="ino-wrap hero__stats-inner">
+          <div className="hero__stat">
+            <span className="hero__stat-n"><CountUp to={75} suffix="+" /></span>
+            <span className="hero__stat-l">Products shipped</span>
+          </div>
+          <div className="hero__stat-div" />
+          <div className="hero__stat">
+            <span className="hero__stat-n"><CountUp to={98} suffix="%" /></span>
+            <span className="hero__stat-l">Client retention</span>
+          </div>
+          <div className="hero__stat-div" />
+          <div className="hero__stat">
+            <span className="hero__stat-n">2 wks</span>
+            <span className="hero__stat-l">Idea to MVP</span>
+          </div>
+          <p className="hero__byline">
+            Trusted by founders, CTOs, and product teams worldwide
+          </p>
+        </div>
+      </motion.div>
+
+      <FlowLine />
+      <Marquee />
     </header>
   );
 }

@@ -343,9 +343,9 @@ img, svg { display: block; }
 .hero__h1 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(64px, 10.5vw, 136px);
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+  font-size: clamp(42px, 6vw, 80px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
   color: #fff;
   margin: 0 0 56px;
   text-wrap: balance;

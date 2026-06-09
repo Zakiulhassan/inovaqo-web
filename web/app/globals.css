@@ -825,3 +825,302 @@ img, svg { display: block; }
 @media (max-width: 760px) {
   .footer__nav { display: none; }
 }
+
+/* ---- Grain texture overlay ---- */
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.032;
+  pointer-events: none;
+  z-index: 9998;
+  animation: grain 0.4s steps(2) infinite;
+}
+@keyframes grain {
+  0%   { transform: translate(0,0); }
+  25%  { transform: translate(-3%,3%); }
+  50%  { transform: translate(3%,-3%); }
+  75%  { transform: translate(-3%,-3%); }
+  100% { transform: translate(3%,3%); }
+}
+
+/* ---- Custom cursor ---- */
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 6px; height: 6px;
+  background: var(--brand);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(16,213,200,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
+}
+.cursor-ring.hovered {
+  width: 56px; height: 56px;
+  border-color: var(--brand);
+  background: rgba(16,213,200,0.06);
+}
+body { cursor: none; }
+a, button, [role="button"] { cursor: none; }
+
+/* ---- Hero background blobs ---- */
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+.hero-blob-1 {
+  width: 700px; height: 700px;
+  background: rgba(16,213,200,0.18);
+  top: -200px; left: 30%;
+  transform: translateX(-50%);
+  animation: blob1 9s ease-in-out infinite alternate;
+}
+.hero-blob-2 {
+  width: 400px; height: 400px;
+  background: rgba(7,95,89,0.25);
+  bottom: 80px; right: 5%;
+  animation: blob2 11s ease-in-out infinite alternate;
+}
+@keyframes blob1 {
+  from { transform: translateX(-50%) scale(1) translate(0, 0); }
+  to   { transform: translateX(-50%) scale(1.12) translate(40px, -30px); }
+}
+@keyframes blob2 {
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.1) translate(-30px, 20px); }
+}
+
+/* ---- Section fade-up base (applied by JS) ---- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(44px);
+  transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+}
+.fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Stagger delays ---- */
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+.stagger-4 { transition-delay: 0.32s; }
+
+/* ---- Service row hover overrides ---- */
+.svc-row {
+  transition: background 0.35s ease, padding-left 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.svc-row:hover {
+  background: rgba(16,213,200,0.04);
+  padding-left: 12px;
+}
+.svc-row:hover .svc-row__num {
+  color: var(--brand);
+}
+.svc-row__num {
+  transition: color 0.3s ease;
+}
+
+/* ---- CTA animated gradient ---- */
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(16,213,200,0.12) 0%, transparent 70%);
+  animation: cta-pulse 5s ease-in-out infinite alternate;
+}
+@keyframes cta-pulse {
+  from { opacity: 0.6; transform: scale(0.95); }
+  to   { opacity: 1;   transform: scale(1.05); }
+}
+
+/* ---- Testimonial card hover ---- */
+.testimonial-card {
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease, box-shadow 0.4s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(16,213,200,0.25);
+  box-shadow: 0 24px 48px -16px rgba(9,25,27,0.5), 0 0 0 1px rgba(16,213,200,0.1);
+}
+
+/* ---- Case study card hover ---- */
+.cs-card {
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease, box-shadow 0.4s ease;
+}
+.cs-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(16,213,200,0.3);
+  box-shadow: 0 28px 60px -20px rgba(9,25,27,0.6);
+}
+.cs-card:hover .cs-card__arrow {
+  transform: translateX(4px);
+  color: var(--brand);
+}
+.cs-card__arrow {
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), color 0.3s ease;
+}
+
+/* ---- Hero text stagger (applied via JS / framer-motion) ---- */
+.hero-line-wrap { overflow: hidden; }
+.hero-line-inner {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-line-inner.visible {
+  transform: translateY(0);
+}
+
+/* ---- Nav link hover underline ---- */
+.nav__links a {
+  position: relative;
+}
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--brand);
+  transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.nav__links a:hover::after { width: 100%; }
+
+/* ---- "Let's Talk" button hover glow ---- */
+.nav-cta:hover {
+  box-shadow: 0 0 24px rgba(16,213,200,0.35);
+}
+
+/* ---- Pain card hover ---- */
+.pain-card {
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-left-color 0.3s ease;
+}
+.pain-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -12px rgba(9,25,27,0.12);
+}
+
+/* ---- Process card hover ---- */
+.process-card {
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.3s ease;
+}
+.process-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -12px rgba(9,25,27,0.12);
+  border-color: rgba(16,213,200,0.3);
+}
+
+/* ---- Magnetic button wrapper ---- */
+.magnetic {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ---- Hero new classes ---- */
+.hero__inner { padding-top: 140px; padding-bottom: 80px; }
+.hero__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
+  background: rgba(16,213,200,0.08);
+  border: 1px solid rgba(16,213,200,0.2);
+  border-radius: var(--radius-pill);
+  padding: 6px 16px;
+  margin-bottom: 32px;
+}
+.hero__h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(48px, 7vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 28px;
+  text-wrap: balance;
+}
+.hero__em {
+  font-style: italic;
+  color: var(--brand);
+  font-weight: 700;
+}
+.hero__sub {
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.65;
+  color: #8FAAA6;
+  max-width: 54ch;
+  margin: 0 0 36px;
+}
+.hero__ctas {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+.hero__ghost-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #8FAAA6;
+  transition: color 0.25s ease, gap 0.25s ease;
+}
+.hero__ghost-link:hover { color: #fff; gap: 12px; }
+.hero__trust {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.hero__stat-n {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 36px;
+  color: #fff;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+.hero__stat-l {
+  display: block;
+  font-size: 12.5px;
+  color: #5A7370;
+  margin-top: 4px;
+  font-weight: 500;
+}
+.hero__divider {
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,.12);
+}
+.hero__trust-line {
+  font-size: 12.5px;
+  color: #3D5A5C;
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+}

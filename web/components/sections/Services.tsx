@@ -1,3 +1,5 @@
+import { FadeUp } from '@/components/ui/FadeUp';
+
 const services = [
   {
     num: '01',
@@ -29,20 +31,24 @@ export function Services() {
   return (
     <section className="services" id="services">
       <div className="ino-wrap">
-        <div className="services__head">
-          <span className="ino-eye">What We Do</span>
-          <h2 className="ino-h2">Four ways we make your product stronger.</h2>
-        </div>
+        <FadeUp>
+          <div className="services__head">
+            <span className="ino-eye">What We Do</span>
+            <h2 className="ino-h2">Four ways we make your product stronger.</h2>
+          </div>
+        </FadeUp>
         <div className="svc-list">
-          {services.map((s) => (
-            <div key={s.num} className="svc-row">
-              <span className="svc-num">{s.num}</span>
-              <div className="svc-body">
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
+          {services.map((s, i) => (
+            <FadeUp key={s.num} delay={0.08 * (i + 1)}>
+              <div className="svc-row">
+                <span className="svc-num svc-row__num">{s.num}</span>
+                <div className="svc-body">
+                  <h3>{s.title}</h3>
+                  <p>{s.desc}</p>
+                </div>
+                <span className="svc-tag">{s.tag}</span>
               </div>
-              <span className="svc-tag">{s.tag}</span>
-            </div>
+            </FadeUp>
           ))}
         </div>
       </div>

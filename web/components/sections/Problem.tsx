@@ -1,3 +1,5 @@
+import { FadeUp } from '@/components/ui/FadeUp';
+
 const painPoints = [
   {
     title: 'Moving too slowly',
@@ -17,17 +19,21 @@ export function Problem() {
   return (
     <section className="problem" id="problem">
       <div className="ino-wrap">
-        <span className="ino-eye">The Real Cost of the Wrong Partner</span>
-        <h2 className="ino-h2">Most teams don&apos;t fail because the idea was bad.</h2>
-        <p className="problem__lead">
-          They fail because they couldn&apos;t move fast enough, couldn&apos;t find the right technical partner, or wasted months building the wrong thing. Sound familiar?
-        </p>
+        <FadeUp>
+          <span className="ino-eye">The Real Cost of the Wrong Partner</span>
+          <h2 className="ino-h2">Most teams don&apos;t fail because the idea was bad.</h2>
+          <p className="problem__lead">
+            They fail because they couldn&apos;t move fast enough, couldn&apos;t find the right technical partner, or wasted months building the wrong thing. Sound familiar?
+          </p>
+        </FadeUp>
         <div className="problem__cards">
-          {painPoints.map((p) => (
-            <div key={p.title} className="pain-card">
-              <h3>{p.title}</h3>
-              <p>{p.desc}</p>
-            </div>
+          {painPoints.map((p, i) => (
+            <FadeUp key={p.title} delay={0.1 * (i + 1)}>
+              <div className="pain-card">
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </div>
+            </FadeUp>
           ))}
         </div>
       </div>

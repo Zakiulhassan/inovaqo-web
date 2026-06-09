@@ -1,3 +1,5 @@
+import { FadeUp } from '@/components/ui/FadeUp';
+
 const ArrowIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M5 12h14M13 6l6 6-6 6"/>
@@ -26,20 +28,24 @@ export function CaseStudies() {
   return (
     <section className="case-studies" id="case-studies">
       <div className="ino-wrap">
-        <div className="case-studies__head">
-          <span className="ino-eye">Selected Work</span>
-          <h2 className="ino-h2">Work that speaks for itself.</h2>
-        </div>
+        <FadeUp>
+          <div className="case-studies__head">
+            <span className="ino-eye">Selected Work</span>
+            <h2 className="ino-h2">Work that speaks for itself.</h2>
+          </div>
+        </FadeUp>
         <div className="cs-grid">
-          {projects.map((p) => (
-            <div key={p.title} className="cs-card">
-              <span className="cs-card__tag">{p.tag}</span>
-              <h3>{p.title}</h3>
-              <p>{p.desc}</p>
-              <span className="cs-card__link">
-                View case study <ArrowIcon />
-              </span>
-            </div>
+          {projects.map((p, i) => (
+            <FadeUp key={p.title} delay={0.1 * (i + 1)}>
+              <div className="cs-card">
+                <span className="cs-card__tag">{p.tag}</span>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+                <span className="cs-card__link cs-card__arrow">
+                  View case study <ArrowIcon />
+                </span>
+              </div>
+            </FadeUp>
           ))}
         </div>
       </div>

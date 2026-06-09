@@ -1,3 +1,5 @@
+import { FadeUp } from '@/components/ui/FadeUp';
+
 const steps = [
   {
     num: '01',
@@ -25,18 +27,22 @@ export function Process() {
   return (
     <section className="process" id="process">
       <div className="ino-wrap">
-        <span className="ino-eye">How We Work</span>
-        <h2 className="ino-h2">No black boxes. No surprises.</h2>
-        <p className="process__sub">
-          We work the way you&apos;d want a team to work — clear, honest, and focused on what actually moves things forward.
-        </p>
+        <FadeUp>
+          <span className="ino-eye">How We Work</span>
+          <h2 className="ino-h2">No black boxes. No surprises.</h2>
+          <p className="process__sub">
+            We work the way you&apos;d want a team to work — clear, honest, and focused on what actually moves things forward.
+          </p>
+        </FadeUp>
         <div className="proc-grid">
-          {steps.map((s) => (
-            <div key={s.num} className="proc-card">
-              <div className="proc-card__num">{s.num}</div>
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
-            </div>
+          {steps.map((s, i) => (
+            <FadeUp key={s.num} delay={0.1 * (i + 1)}>
+              <div className="proc-card process-card">
+                <div className="proc-card__num">{s.num}</div>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            </FadeUp>
           ))}
         </div>
       </div>

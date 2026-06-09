@@ -1,0 +1,22 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Accents & semantic" subtitle="Mint, sage, slate, deep teal + status colors" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 22px; background: var(--surface); font-family: var(--font-sans); }
+  .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; }
+  .chip { height: 60px; border-radius: var(--radius-md); box-shadow: var(--shadow-xs); border: 1px solid rgba(9,25,27,0.08); }
+  .name { margin-top: 7px; font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; color: var(--text); }
+  .hex { font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); }
+</style></head>
+<body>
+  <div class="grid">
+    <div><div class="chip" style="background:var(--mint)"></div><div class="name">mint</div><div class="hex">#D8FFE7</div></div>
+    <div><div class="chip" style="background:var(--sage)"></div><div class="name">sage</div><div class="hex">#9AAF97</div></div>
+    <div><div class="chip" style="background:var(--slate)"></div><div class="name">slate</div><div class="hex">#526162</div></div>
+    <div><div class="chip" style="background:var(--cyan-900)"></div><div class="name">teal-900</div><div class="hex">#0A3C40</div></div>
+    <div><div class="chip" style="background:var(--success-500)"></div><div class="name">success</div><div class="hex">#14A085</div></div>
+    <div><div class="chip" style="background:var(--warning-500)"></div><div class="name">warning</div><div class="hex">#E0A52E</div></div>
+    <div><div class="chip" style="background:var(--danger-500)"></div><div class="name">danger</div><div class="hex">#E5544B</div></div>
+    <div><div class="chip" style="background:var(--info-500)"></div><div class="name">info</div><div class="hex">#10D5C8</div></div>
+  </div>
+</body></html>

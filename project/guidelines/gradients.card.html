@@ -1,0 +1,26 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Brand gradients" subtitle="Cyan → deep teal (from the logo) + deep surface gradient" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 22px; background: var(--surface); font-family: var(--font-mono); }
+  .row { display: flex; gap: 14px; }
+  .sw { flex: 1; }
+  .chip { height: 92px; border-radius: var(--radius-md); box-shadow: var(--shadow-xs); border: 1px solid rgba(9,25,27,0.06); display:flex; align-items:flex-end; padding:12px; box-sizing:border-box; }
+  .chip span { font-size: 10px; font-weight:700; color:#fff; }
+  .name { margin-top: 8px; font-size: 10px; font-weight: 700; color: var(--text); }
+  .val { font-size: 9.5px; color: var(--text-muted); margin-top:2px; }
+</style></head>
+<body>
+  <div class="row">
+    <div class="sw">
+      <div class="chip" style="background:var(--gradient-brand)"><span>★ brand</span></div>
+      <div class="name">--gradient-brand</div>
+      <div class="val">#10D5C8 → #075F59 · 120°</div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background:var(--gradient-deep)"><span>surface</span></div>
+      <div class="name">--gradient-deep</div>
+      <div class="val">#0E2C2D → #0A3C40 → #062227</div>
+    </div>
+  </div>
+</body></html>

@@ -1,0 +1,36 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Stat slide" subtitle="Big numbers on dark with a growing connector line" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; }
+  .slide { position:relative; width:1280px; height:720px; background: var(--n-950); color:#fff; overflow:hidden; font-family: var(--font-sans); }
+  .pad { position:absolute; inset:0; padding:64px 72px; display:flex; flex-direction:column; }
+  .top { display:flex; justify-content:space-between; align-items:center; }
+  .eyebrow { font-family:var(--font-mono); font-size:15px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan-300); }
+  .logo { height:26px; }
+  h2 { font-family:var(--font-display); font-weight:700; font-size:46px; line-height:1.05; letter-spacing:-0.02em; margin:26px 0 0; max-width:22ch; color:#fff; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); margin-top:auto; position:relative; }
+  .stat { padding-right:24px; }
+  .stat .n { font-family:var(--font-display); font-weight:700; font-size:104px; line-height:1; letter-spacing:-0.03em; color:var(--cyan-400); }
+  .stat .l { font-size:18px; color:#A9C3BE; margin-top:14px; max-width:18ch; }
+  svg.line { position:absolute; left:0; right:0; bottom:170px; width:100%; height:90px; }
+</style></head>
+<body>
+  <div class="slide">
+    <div class="pad">
+      <div class="top">
+        <span class="eyebrow">By the numbers · 04</span>
+        <img class="logo" src="../assets/inovaqo-logo-white.svg" alt="Inovaqo">
+      </div>
+      <h2>Nine years of shipping sharp, scalable, real.</h2>
+      <svg class="line" viewBox="0 0 1280 90" preserveAspectRatio="none" fill="none">
+        <path class="ino-line__path ino-line__path--flow" d="M -10 60 C 220 60, 280 18, 470 30 C 700 44, 760 78, 980 58 C 1120 46, 1200 64, 1290 50" style="stroke-width:2.5"/>
+      </svg>
+      <div class="stats">
+        <div class="stat"><div class="n">40+</div><div class="l">Products shipped to production</div></div>
+        <div class="stat"><div class="n">9</div><div class="l">Years building together</div></div>
+        <div class="stat"><div class="n">98%</div><div class="l">Client retention rate</div></div>
+      </div>
+    </div>
+  </div>
+</body></html>

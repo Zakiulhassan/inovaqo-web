@@ -1,0 +1,50 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Capabilities slide" subtitle="Three-column services layout on light" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; }
+  .slide { position:relative; width:1280px; height:720px; background: var(--n-25); color:var(--text); overflow:hidden; font-family: var(--font-sans); }
+  .pad { position:absolute; inset:0; padding:64px 72px; display:flex; flex-direction:column; }
+  .top { display:flex; justify-content:space-between; align-items:center; }
+  .eyebrow { font-family:var(--font-mono); font-size:15px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--brand-press); }
+  .logo { height:26px; }
+  h2 { font-family:var(--font-display); font-weight:700; font-size:52px; line-height:1.04; letter-spacing:-0.02em; color:var(--text-strong); margin:26px 0 0; max-width:20ch; }
+  .cols { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:auto; }
+  .col { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px 28px; box-shadow:var(--shadow-sm); }
+  .ico { width:56px; height:56px; border-radius:var(--radius-md); background:var(--brand-soft); color:var(--brand-press); display:grid; place-items:center; margin-bottom:22px; }
+  .ico svg { width:28px; height:28px; }
+  .col h3 { font-family:var(--font-display); font-weight:700; font-size:25px; letter-spacing:-0.01em; color:var(--text-strong); margin:0 0 10px; }
+  .col p { font-size:16px; line-height:1.55; color:var(--text-muted); margin:0; }
+  .num { font-family:var(--font-mono); font-size:13px; color:var(--brand-press); font-weight:700; letter-spacing:.1em; }
+</style></head>
+<body>
+  <div class="slide">
+    <div class="pad">
+      <div class="top">
+        <span class="eyebrow">What we do · 01</span>
+        <img class="logo" src="../assets/inovaqo-logo.svg" alt="Inovaqo">
+      </div>
+      <h2>Clear communication, strong engineering.</h2>
+      <div class="cols">
+        <div class="col">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.142 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.142 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/></svg></div>
+          <span class="num">01</span>
+          <h3>AI &amp; Machine Learning</h3>
+          <p>Models that read your data, predict, and automate — built into the product, not bolted on.</p>
+        </div>
+        <div class="col">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+          <span class="num">02</span>
+          <h3>Data → Insight</h3>
+          <p>We turn messy, scattered data into dashboards and signals your team can act on.</p>
+        </div>
+        <div class="col">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+          <span class="num">03</span>
+          <h3>Web &amp; Mobile Apps</h3>
+          <p>Fast, accessible, beautifully engineered apps across web, iOS, and Android.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>

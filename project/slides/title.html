@@ -1,0 +1,34 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Title slide" subtitle="Dark hero title with script accent + growing line" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; }
+  .slide { position:relative; width:1280px; height:720px; background: var(--n-950); color:#fff; overflow:hidden; font-family: var(--font-sans); }
+  .slide::before { content:""; position:absolute; top:-20%; left:-5%; width:780px; height:680px; background: radial-gradient(closest-side, rgba(16,213,200,.22), transparent 70%); }
+  .pad { position:absolute; inset:0; padding:64px 72px; display:flex; flex-direction:column; }
+  .top { display:flex; justify-content:space-between; align-items:center; position:relative; z-index:2; }
+  .eyebrow { font-family:var(--font-mono); font-size:15px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan-300); }
+  .logo { height:26px; }
+  .center { margin-top:auto; margin-bottom:auto; position:relative; z-index:2; }
+  h1 { font-family:var(--font-display); font-weight:700; font-size:76px; line-height:1.0; letter-spacing:-0.03em; margin:0; max-width:15ch; color:#fff; }
+  h1 .s { font-family:var(--font-display); font-style:italic; font-weight:700; color:var(--cyan-400); }
+  .sub { font-size:22px; color:#A9C3BE; margin-top:30px; max-width:50ch; }
+  svg.line { position:absolute; left:0; right:0; bottom:0; width:100%; height:150px; z-index:1; }
+</style></head>
+<body>
+  <div class="slide">
+    <svg class="line" viewBox="0 0 1280 150" preserveAspectRatio="none" fill="none">
+      <path class="ino-line__path ino-line__path--flow" d="M -10 90 C 240 90, 300 20, 520 36 C 760 54, 820 130, 1060 100 C 1180 86, 1230 104, 1290 96" style="stroke-width:3"/>
+    </svg>
+    <div class="pad">
+      <div class="top">
+        <span class="eyebrow">Capabilities Deck</span>
+        <img class="logo" src="../assets/inovaqo-logo-white.svg" alt="Inovaqo">
+      </div>
+      <div class="center">
+        <h1>We engineer software that <span class="s">makes a difference.</span></h1>
+        <p class="sub">Smart web and mobile apps for teams that want to move fast and build right.</p>
+      </div>
+    </div>
+  </div>
+</body></html>

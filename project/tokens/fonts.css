@@ -1,0 +1,11 @@
+/* ===========================================================================
+   Inovaqo — Fonts
+   Google Fonts substitutions (no original font files were provided):
+   · Space Grotesk — geometric grotesk for display/headings (matches the
+     angular INOVAQO wordmark)
+   · Manrope       — clean, lightly-geometric body & UI text
+   · Space Mono    — eyebrows, labels, code, data
+   Emphasis words use the display face in brand cyan (no script font).
+   Flagged to the user: confirm or replace with the studio's licensed faces.
+   =========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');

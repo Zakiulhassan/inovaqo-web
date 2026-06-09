@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;background:var(--bg)}</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script>
+// DEV-ONLY harness — loads component JSX at runtime (each file in its own scope)
+// because the generated _ds_bundle.js isn't served to the raw preview iframe.
+const FILES = (new URLSearchParams(location.search).get('files')||'').split(',').filter(Boolean);
+const DEMO = new URLSearchParams(location.search).get('demo')||'';
+(async () => {
+  const REG = {};
+  for (const f of FILES) {
+    let t = await (await fetch(f)).text();
+    const names = [...t.matchAll(/export\s+function\s+(\w+)/g)].map(m=>m[1]);
+    t = t.replace(/^\s*import[^\n]*\n/gm, '').replace(/^\s*export\s+/gm, '');
+    const code = Babel.transform(t, {presets:['react']}).code;
+    const fn = new Function('React', code + '\n;return {' + names.join(',') + '};');
+    Object.assign(REG, fn(window.React));
+  }
+  const demoSrc = await (await fetch(DEMO)).text();
+  const demoCode = Babel.transform(demoSrc, {presets:['react']}).code;
+  const keys = Object.keys(REG);
+  new Function('React','ReactDOM', ...keys, demoCode)(window.React, window.ReactDOM, ...keys.map(k=>REG[k]));
+})().catch(e => { document.getElementById('root').innerHTML = '<pre style="color:red;padding:20px;white-space:pre-wrap">'+e+'</pre>'; });
+</script>
+</body></html>

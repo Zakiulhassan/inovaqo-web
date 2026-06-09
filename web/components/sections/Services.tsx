@@ -4,26 +4,30 @@ const services = [
   {
     num: '01',
     title: 'AI Transformation',
-    desc: 'We help you go beyond the hype. Whether it\'s custom models, intelligent automation, or AI-powered features your users will actually notice — we build for real outcomes, not demos.',
+    desc: 'Ship AI features your users actually notice. We move you from "exploring AI" to production-grade models, intelligent automation, and measurable efficiency gains — in weeks, not quarters.',
     tag: 'Strategy + Build',
+    outcome: 'Avg. 40% reduction in manual workflows',
   },
   {
     num: '02',
     title: 'Data Science & ETL',
-    desc: 'We turn messy, siloed data into a competitive advantage. Clean pipelines, advanced analytics, and structured systems that give your team answers — not just numbers.',
+    desc: "Stop making decisions on gut feeling. We turn siloed, messy data into clean pipelines and sharp analytics — so your team sees what's working before your competitors do.",
     tag: 'Data + Analytics',
+    outcome: 'Real-time dashboards in 3–6 weeks',
   },
   {
     num: '03',
     title: 'Cloud Architecture & DevOps',
-    desc: "Infrastructure that doesn't crack under pressure. We build secure, scalable cloud-native systems that grow with your product and don't become your biggest operational risk.",
+    desc: "Your infrastructure shouldn't be your biggest risk. We build cloud-native systems that scale quietly in the background — secure, observable, and ready for whatever traffic spike comes next.",
     tag: 'Infrastructure',
+    outcome: '99.9% uptime SLA across client systems',
   },
   {
     num: '04',
-    title: 'Custom Web & Mobile Apps',
-    desc: 'From MVP to market-ready. We design and build products that look sharp, work everywhere, and scale with your growth — without rewriting everything six months in.',
+    title: 'Product Engineering',
+    desc: 'From napkin sketch to market-ready product. We design and build apps that look sharp, perform everywhere, and grow with you — without a full rewrite six months after launch.',
     tag: 'Design + Dev',
+    outcome: 'MVP delivery in 2 weeks',
   },
 ];
 
@@ -34,7 +38,7 @@ export function Services() {
         <FadeUp>
           <div className="services__head">
             <span className="ino-eye">What We Do</span>
-            <h2 className="ino-h2">Four ways we make your product stronger.</h2>
+            <h2 className="ino-h2">We solve the problems that slow teams down.</h2>
           </div>
         </FadeUp>
         <div className="svc-list">
@@ -45,6 +49,7 @@ export function Services() {
                 <div className="svc-body">
                   <h3>{s.title}</h3>
                   <p>{s.desc}</p>
+                  <span className="svc-outcome">{s.outcome}</span>
                 </div>
                 <span className="svc-tag">{s.tag}</span>
               </div>

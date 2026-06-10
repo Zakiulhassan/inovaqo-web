@@ -3,49 +3,44 @@ import { useEffect, useRef } from 'react';
 
 /**
  * A bold ribbon that grows with scroll across the first few sections
- * after the hero. It flows, curls into a full loop, flows again, takes
- * a turn, curls once more — like lusion.co's ribbon. It renders above
- * section backgrounds but below all section content.
+ * after the hero — modelled on lusion.co's ribbon: big sweeping arcs
+ * and one wide, soft loop, with smooth curvature throughout. It renders
+ * above section backgrounds but below all section content.
  */
 
-// Waypoints as fractions of the zone size. A `curl` value adds a full
-// circular loop (radius in px) at that waypoint before flowing on.
-const FLOW: Array<{ x: number; y: number; curl?: number }> = [
-  { x: 0.50, y: -0.02 },
-  { x: 0.83, y: 0.10 },
-  { x: 0.78, y: 0.24, curl: 85 },
-  { x: 0.40, y: 0.42 },
-  { x: 0.13, y: 0.54 },
-  { x: 0.20, y: 0.68, curl: 58 },
-  { x: 0.62, y: 0.82 },
-  { x: 0.88, y: 0.91 },
+// Waypoints as fractions of the zone size. The path is fitted with a
+// Catmull-Rom spline, so curvature stays smooth everywhere. Points
+// 3..8 orbit a center, which makes the line cross itself in one big
+// lazy loop (like Lusion's), rather than a tight pigtail.
+const POINTS: Array<[number, number]> = [
+  [0.56, -0.03], // enters from under the hero
+  [0.68, 0.09],  // drifts right as it descends
+  [0.60, 0.20],  // turns back left into the loop
+  [0.30, 0.23],  // loop: top-left
+  [0.15, 0.32],  // loop: far left, heading down
+  [0.34, 0.42],  // loop: bottom, heading right
+  [0.60, 0.38],  // loop: right side, heading up
+  [0.65, 0.26],  // loop closes, crossing the entry stroke
+  [0.84, 0.36],  // exits right
+  [0.62, 0.52],  // long lazy S — dips back left
+  [0.30, 0.62],
+  [0.46, 0.75],  // swings back right
+  [0.78, 0.84],
+  [0.93, 0.91],  // tapers out, well before the zone ends
 ];
 
-// Full circle drawn with 4 cubic arcs, starting and ending at the top
-// of the circle (the current pen position), so the line "curls" into a
-// pigtail loop and continues on its way.
-function curl(cx: number, cy: number, r: number, ccw: boolean): string {
-  const k = 0.5523 * r;
-  const s = ccw ? -1 : 1;
-  return [
-    `C ${cx + s * k} ${cy - r}, ${cx + s * r} ${cy - k}, ${cx + s * r} ${cy}`,
-    `C ${cx + s * r} ${cy + k}, ${cx + s * k} ${cy + r}, ${cx} ${cy + r}`,
-    `C ${cx - s * k} ${cy + r}, ${cx - s * r} ${cy + k}, ${cx - s * r} ${cy}`,
-    `C ${cx - s * r} ${cy - k}, ${cx - s * k} ${cy - r}, ${cx} ${cy - r}`,
-  ].join(' ');
-}
-
+// Catmull-Rom spline -> cubic beziers: smooth tangents at every
+// waypoint, no corners.
 function buildPath(w: number, h: number): string {
-  let d = `M ${FLOW[0].x * w} ${FLOW[0].y * h}`;
-  for (let i = 1; i < FLOW.length; i++) {
-    const prev = FLOW[i - 1];
-    const cur = FLOW[i];
-    const midY = ((prev.y + cur.y) / 2) * h;
-    d += ` C ${prev.x * w} ${midY}, ${cur.x * w} ${midY}, ${cur.x * w} ${cur.y * h}`;
-    if (cur.curl) {
-      // loop hangs below the waypoint; alternate curl direction
-      d += ' ' + curl(cur.x * w, cur.y * h + cur.curl, cur.curl, i % 2 === 0);
-    }
+  const pts = POINTS.map(([fx, fy]) => [fx * w, fy * h]);
+  const p = [pts[0], ...pts, pts[pts.length - 1]];
+  let d = `M ${p[1][0]} ${p[1][1]}`;
+  for (let i = 1; i < p.length - 2; i++) {
+    const c1x = p[i][0] + (p[i + 1][0] - p[i - 1][0]) / 6;
+    const c1y = p[i][1] + (p[i + 1][1] - p[i - 1][1]) / 6;
+    const c2x = p[i + 1][0] - (p[i + 2][0] - p[i][0]) / 6;
+    const c2y = p[i + 1][1] - (p[i + 2][1] - p[i][1]) / 6;
+    d += ` C ${c1x} ${c1y}, ${c2x} ${c2y}, ${p[i + 1][0]} ${p[i + 1][1]}`;
   }
   return d;
 }

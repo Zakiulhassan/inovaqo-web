@@ -2,45 +2,30 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * Decorative ribbon for light-background sections. Travels horizontally
- * across the section, makes one perfectly round loop (a true circle,
- * entered and exited with matching horizontal tangents, so there are no
- * corners anywhere), and grows in sync with scroll.
+ * Decorative ribbon for light-background sections. Travels from the top
+ * of the section to the bottom in wide sweeping arcs — no loops — and
+ * grows in sync with scroll.
  *
  * Appears only after the page has loaded, with a delay, and sits above
  * the section background but below the content.
  */
 
-// Full circle from the current pen position (top of the circle),
-// clockwise, ending back where it started. Tangent at both ends is
-// horizontal — matching the S-curves on either side.
-function loop(cx: number, cy: number, r: number): string {
-  const k = 0.5523 * r;
-  return [
-    `C ${cx + k} ${cy - r}, ${cx + r} ${cy - k}, ${cx + r} ${cy}`,
-    `C ${cx + r} ${cy + k}, ${cx + k} ${cy + r}, ${cx} ${cy + r}`,
-    `C ${cx - k} ${cy + r}, ${cx - r} ${cy + k}, ${cx - r} ${cy}`,
-    `C ${cx - r} ${cy - k}, ${cx - k} ${cy - r}, ${cx} ${cy - r}`,
-  ].join(' ');
-}
-
-// S-curve between two points with horizontal tangents at both ends.
+// Arc between two points with vertical tangents at both ends, so the
+// chain of arcs forms one continuous serpentine with no corners.
 function sweep(x0: number, y0: number, x1: number, y1: number): string {
-  const dx = (x1 - x0) * 0.5;
-  return `C ${x0 + dx} ${y0}, ${x1 - dx} ${y1}, ${x1} ${y1}`;
+  const dy = (y1 - y0) * 0.55;
+  return `C ${x0} ${y0 + dy}, ${x1} ${y1 - dy}, ${x1} ${y1}`;
 }
 
 function buildPath(w: number, h: number, flip: boolean): string {
   const X = (f: number) => (flip ? (1 - f) * w : f * w);
   const Y = (f: number) => f * h;
-  const r = Math.min(h * 0.17, 100);
 
-  let d = `M ${X(-0.04)} ${Y(0.30)}`;
-  d += ' ' + sweep(X(-0.04), Y(0.30), X(0.26), Y(0.62));
-  d += ' ' + sweep(X(0.26), Y(0.62), X(0.52), Y(0.36));
-  d += ' ' + loop(X(0.52), Y(0.36) + r, r);
-  d += ' ' + sweep(X(0.52), Y(0.36), X(0.78), Y(0.60));
-  d += ' ' + sweep(X(0.78), Y(0.60), X(1.04), Y(0.32));
+  // top -> bottom: wide S-sweeps, left then right then out the bottom
+  let d = `M ${X(0.68)} ${Y(-0.06)}`;
+  d += ' ' + sweep(X(0.68), Y(-0.06), X(0.14), Y(0.36));
+  d += ' ' + sweep(X(0.14), Y(0.36), X(0.86), Y(0.70));
+  d += ' ' + sweep(X(0.86), Y(0.70), X(0.38), Y(1.06));
   return d;
 }
 

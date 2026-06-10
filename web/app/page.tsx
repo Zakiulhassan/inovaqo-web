@@ -9,12 +9,16 @@ import { CaseStudies } from '@/components/sections/CaseStudies';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { CTA } from '@/components/sections/CTA';
 import { Footer } from '@/components/sections/Footer';
+import { FlowLine } from '@/components/ui/FlowLine';
 
 export default function Home() {
   return (
     <>
-      <Nav /><Hero /><TrustBar /><Problem /><Services /><WhyInovaqo />
-      <Process /><CaseStudies /><Testimonials /><CTA /><Footer />
+      <Nav /><Hero /><TrustBar /><Problem />
+      <div className="line-divider line-divider--dark"><FlowLine /></div>
+      <Services /><WhyInovaqo /><Process />
+      <div className="line-divider line-divider--dark2"><FlowLine /></div>
+      <CaseStudies /><Testimonials /><CTA /><Footer />
     </>
   );
 }

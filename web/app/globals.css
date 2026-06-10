@@ -1438,7 +1438,7 @@ a, button, [role="button"] { cursor: none; }
 .hero__h1 em,
 .grad-text {
   font-style: italic;
-  background: linear-gradient(90deg, #10D5C8, #7C6FFF, #22BFD8, #10D5C8);
+  background: linear-gradient(90deg, var(--cyan-200), var(--cyan-400), var(--cyan-600), var(--cyan-200));
   background-size: 250% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -1450,7 +1450,7 @@ a, button, [role="button"] { cursor: none; }
 }
 .hero-blob-3 {
   width: 540px; height: 540px;
-  background: rgba(124,111,255,0.13);
+  background: rgba(16,213,200,0.13);
   top: 10%; right: -120px;
   filter: blur(130px);
   animation: blob2 13s ease-in-out infinite alternate;

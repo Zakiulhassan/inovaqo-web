@@ -113,9 +113,9 @@ export function SectionRibbon({ flip = false }: { flip?: boolean }) {
       <svg ref={svgRef} preserveAspectRatio="none">
         <defs>
           <linearGradient id={flip ? 'ribbonGradB' : 'ribbonGradA'} x1="0" y1="0" x2="1" y2="0.4">
-            <stop offset="0%" stopColor="#10D5C8" />
-            <stop offset="50%" stopColor="#22BFD8" />
-            <stop offset="100%" stopColor="#7C6FFF" />
+            <stop offset="0%" stopColor="#4FDDD3" />
+            <stop offset="50%" stopColor="#10D5C8" />
+            <stop offset="100%" stopColor="#0A7068" />
           </linearGradient>
         </defs>
         <path

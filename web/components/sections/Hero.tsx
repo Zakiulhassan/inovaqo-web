@@ -16,6 +16,7 @@ export function Hero() {
     <header className="hero" id="top">
       <div className="hero-blob hero-blob-1" />
       <div className="hero-blob hero-blob-2" />
+      <div className="hero-blob hero-blob-3" />
 
       <div className="ino-wrap hero__wrap">
         <motion.p

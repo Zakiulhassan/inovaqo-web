@@ -9,19 +9,12 @@ import { CaseStudies } from '@/components/sections/CaseStudies';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { CTA } from '@/components/sections/CTA';
 import { Footer } from '@/components/sections/Footer';
-import { ScrollLine } from '@/components/ui/ScrollLine';
 
 export default function Home() {
   return (
     <>
-      <Nav />
-      <Hero />
-      <div className="scroll-line-zone">
-        <ScrollLine />
-        <TrustBar /><Problem /><Services />
-      </div>
-      <WhyInovaqo /><Process /><CaseStudies /><Testimonials /><CTA />
-      <Footer />
+      <Nav /><Hero /><TrustBar /><Problem /><Services /><WhyInovaqo />
+      <Process /><CaseStudies /><Testimonials /><CTA /><Footer />
     </>
   );
 }

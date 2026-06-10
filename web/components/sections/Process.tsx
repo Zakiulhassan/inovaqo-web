@@ -1,4 +1,5 @@
 import { FadeUp } from '@/components/ui/FadeUp';
+import { SectionRibbon } from '@/components/ui/SectionRibbon';
 
 const steps = [
   {
@@ -30,6 +31,7 @@ const steps = [
 export function Process() {
   return (
     <section className="process" id="process">
+      <SectionRibbon flip />
       <div className="ino-wrap">
         <FadeUp>
           <span className="ino-eye">How We Work</span>

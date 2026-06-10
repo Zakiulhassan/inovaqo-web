@@ -1,4 +1,5 @@
 import { FadeUp } from '@/components/ui/FadeUp';
+import { SectionRibbon } from '@/components/ui/SectionRibbon';
 
 const painPoints = [
   {
@@ -18,6 +19,7 @@ const painPoints = [
 export function Problem() {
   return (
     <section className="problem" id="problem">
+      <SectionRibbon />
       <div className="ino-wrap">
         <FadeUp>
           <span className="ino-eye">The Real Cost of the Wrong Partner</span>

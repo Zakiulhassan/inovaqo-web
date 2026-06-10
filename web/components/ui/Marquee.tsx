@@ -1,16 +1,20 @@
 const ITEMS = [
-  'AI Transformation',
+  'Generative AI',
+  'AI Agents',
+  'LLM Integration',
   'Cloud Architecture',
   'Product Engineering',
+  'RAG Pipelines',
   'Data Science & ETL',
-  'DevOps',
-  'Custom Software',
-  'AI Transformation',
+  'MLOps',
+  'Generative AI',
+  'AI Agents',
+  'LLM Integration',
   'Cloud Architecture',
   'Product Engineering',
+  'RAG Pipelines',
   'Data Science & ETL',
-  'DevOps',
-  'Custom Software',
+  'MLOps',
 ];
 
 export function Marquee() {

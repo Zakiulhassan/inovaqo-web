@@ -18,9 +18,9 @@ export default function Home() {
       <Hero />
       <div className="scroll-line-zone">
         <ScrollLine />
-        <TrustBar /><Problem /><Services /><WhyInovaqo />
-        <Process /><CaseStudies /><Testimonials /><CTA />
+        <TrustBar /><Problem /><Services />
       </div>
+      <WhyInovaqo /><Process /><CaseStudies /><Testimonials /><CTA />
       <Footer />
     </>
   );

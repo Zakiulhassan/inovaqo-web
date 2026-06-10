@@ -1412,18 +1412,23 @@ a, button, [role="button"] { cursor: none; }
 }
 .nav__dropdown-wrap:hover .nav__chevron { transform: rotate(180deg); }
 
-/* ---- ScrollLine: continuous line growing with scroll ---------------------- */
+/* ---- ScrollLine: bold ribbon growing with scroll -------------------------- */
 .scroll-line-zone { position: relative; }
 .scroll-line {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1; /* above section backgrounds */
   pointer-events: none;
 }
 .scroll-line svg {
   width: 100%;
   height: 100%;
   display: block;
+}
+/* lift all section content above the ribbon */
+.scroll-line-zone .ino-wrap {
+  position: relative;
+  z-index: 2;
 }
 @media (max-width: 720px) {
   .scroll-line { display: none; }

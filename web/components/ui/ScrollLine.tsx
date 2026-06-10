@@ -2,40 +2,50 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * A single continuous line that spans every section after the hero.
- * It draws itself in sync with scroll (smooth-lerped so the tip trails
- * fluidly), weaving left and right through the page gutters, with a
- * glowing dot riding the tip of the line.
- *
- * Aesthetic accent only: pointer-events none, low visual weight.
+ * A bold ribbon that grows with scroll across the first few sections
+ * after the hero. It flows, curls into a full loop, flows again, takes
+ * a turn, curls once more — like lusion.co's ribbon. It renders above
+ * section backgrounds but below all section content.
  */
 
-// Waypoints as fractions of the zone's width/height. The line snakes
-// between the page gutters, crossing the center between sections.
-const POINTS: Array<[number, number]> = [
-  [0.50, 0.000],
-  [0.93, 0.045],
-  [0.06, 0.130],
-  [0.50, 0.185],
-  [0.94, 0.250],
-  [0.07, 0.345],
-  [0.92, 0.435],
-  [0.08, 0.530],
-  [0.50, 0.595],
-  [0.93, 0.665],
-  [0.07, 0.760],
-  [0.91, 0.855],
-  [0.50, 0.930],
-  [0.50, 1.000],
+// Waypoints as fractions of the zone size. A `curl` value adds a full
+// circular loop (radius in px) at that waypoint before flowing on.
+const FLOW: Array<{ x: number; y: number; curl?: number }> = [
+  { x: 0.50, y: -0.02 },
+  { x: 0.83, y: 0.10 },
+  { x: 0.78, y: 0.24, curl: 85 },
+  { x: 0.40, y: 0.42 },
+  { x: 0.13, y: 0.54 },
+  { x: 0.20, y: 0.68, curl: 58 },
+  { x: 0.62, y: 0.82 },
+  { x: 0.88, y: 0.91 },
 ];
 
+// Full circle drawn with 4 cubic arcs, starting and ending at the top
+// of the circle (the current pen position), so the line "curls" into a
+// pigtail loop and continues on its way.
+function curl(cx: number, cy: number, r: number, ccw: boolean): string {
+  const k = 0.5523 * r;
+  const s = ccw ? -1 : 1;
+  return [
+    `C ${cx + s * k} ${cy - r}, ${cx + s * r} ${cy - k}, ${cx + s * r} ${cy}`,
+    `C ${cx + s * r} ${cy + k}, ${cx + s * k} ${cy + r}, ${cx} ${cy + r}`,
+    `C ${cx - s * k} ${cy + r}, ${cx - s * r} ${cy + k}, ${cx - s * r} ${cy}`,
+    `C ${cx - s * r} ${cy - k}, ${cx - s * k} ${cy - r}, ${cx} ${cy - r}`,
+  ].join(' ');
+}
+
 function buildPath(w: number, h: number): string {
-  let d = `M ${POINTS[0][0] * w} ${POINTS[0][1] * h}`;
-  for (let i = 1; i < POINTS.length; i++) {
-    const [px, py] = POINTS[i - 1];
-    const [cx, cy] = POINTS[i];
-    const midY = ((py + cy) / 2) * h;
-    d += ` C ${px * w} ${midY}, ${cx * w} ${midY}, ${cx * w} ${cy * h}`;
+  let d = `M ${FLOW[0].x * w} ${FLOW[0].y * h}`;
+  for (let i = 1; i < FLOW.length; i++) {
+    const prev = FLOW[i - 1];
+    const cur = FLOW[i];
+    const midY = ((prev.y + cur.y) / 2) * h;
+    d += ` C ${prev.x * w} ${midY}, ${cur.x * w} ${midY}, ${cur.x * w} ${cur.y * h}`;
+    if (cur.curl) {
+      // loop hangs below the waypoint; alternate curl direction
+      d += ' ' + curl(cur.x * w, cur.y * h + cur.curl, cur.curl, i % 2 === 0);
+    }
   }
   return d;
 }
@@ -43,15 +53,13 @@ function buildPath(w: number, h: number): string {
 export function ScrollLine() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
-  const dotRef = useRef<SVGCircleElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const wrap = wrapRef.current;
     const path = pathRef.current;
-    const dot = dotRef.current;
     const svg = svgRef.current;
-    if (!wrap || !path || !dot || !svg) return;
+    if (!wrap || !path || !svg) return;
 
     const zone = wrap.parentElement;
     if (!zone) return;
@@ -77,24 +85,14 @@ export function ScrollLine() {
     const onScroll = () => {
       const rect = zone.getBoundingClientRect();
       const vh = window.innerHeight;
-      // tip of the line tracks ~65% down the viewport
-      target = Math.max(0, Math.min(1, (vh * 0.65 - rect.top) / rect.height));
+      // tip of the ribbon tracks ~70% down the viewport
+      target = Math.max(0, Math.min(1, (vh * 0.7 - rect.top) / rect.height));
     };
 
     const tick = () => {
       if (!running) return;
-      current += (target - current) * (reduceMotion ? 1 : 0.07);
+      current += (target - current) * (reduceMotion ? 1 : 0.065);
       path.style.strokeDashoffset = String(len * (1 - current));
-
-      // ride the dot along the tip
-      if (current > 0.002 && current < 0.998) {
-        const pt = path.getPointAtLength(len * current);
-        dot.setAttribute('cx', String(pt.x));
-        dot.setAttribute('cy', String(pt.y));
-        dot.style.opacity = '1';
-      } else {
-        dot.style.opacity = '0';
-      }
       raf = requestAnimationFrame(tick);
     };
 
@@ -118,23 +116,20 @@ export function ScrollLine() {
   return (
     <div ref={wrapRef} className="scroll-line" aria-hidden="true">
       <svg ref={svgRef} preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="scrollLineGrad" x1="0" y1="0" x2="0.6" y2="1">
+            <stop offset="0%" stopColor="#10D5C8" />
+            <stop offset="55%" stopColor="#0FB9AE" />
+            <stop offset="100%" stopColor="#0A8F87" />
+          </linearGradient>
+        </defs>
         <path
           ref={pathRef}
           fill="none"
-          stroke="#10D5C8"
-          strokeWidth="2"
+          stroke="url(#scrollLineGrad)"
+          strokeWidth="30"
           strokeLinecap="round"
-          strokeOpacity="0.5"
-        />
-        <circle
-          ref={dotRef}
-          r="5"
-          fill="#10D5C8"
-          style={{
-            opacity: 0,
-            transition: 'opacity 0.3s',
-            filter: 'drop-shadow(0 0 6px rgba(16,213,200,0.9))',
-          }}
+          strokeLinejoin="round"
         />
       </svg>
     </div>
